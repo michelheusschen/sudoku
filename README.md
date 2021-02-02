@@ -13,7 +13,7 @@ import (
 
 func main() {
     // Use the New function to create a new unsolved sudoku.
-    sudoku := New([9][9]int{
+    sudoku := sudoku.New([9][9]int{
         {8, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 3, 6, 0, 0, 0, 0, 0},
         {0, 7, 0, 0, 9, 0, 2, 0, 0},
@@ -36,7 +36,7 @@ func main() {
     // Access the grid of the solved sudoku.
     _ = sudoku.Grid
 
-    // Print the result
+    // Print the result.
     fmt.Println(sudoku)
 
     // [8, 1, 2, 7, 5, 3, 6, 4, 9]

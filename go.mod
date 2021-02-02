@@ -1,3 +1,3 @@
-module github.com/michelheusschen/github
+module github.com/michelheusschen/sudoku
 
 go 1.15

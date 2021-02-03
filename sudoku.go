@@ -52,18 +52,20 @@ func (s *Sudoku) backTrack(row, column int) bool {
 	if s.Grid[row][column] == 0 {
 		s.StepCount++
 
-		// Loop through the possible digits.
+		boxCell := s.boxDigits[row/BoxSize][column/BoxSize]
+		rowCell := s.rowDigits[row]
+		columnCell := s.columnDigits[column]
+
+		// Digits that are already set in either a box, row or column
+		// and can't be placed in the current cell.
+		setDigits := boxCell | rowCell | columnCell
+
+		// Loop through all the digits.
 		for i := 1; i <= Size; i++ {
 			bit := 1 << (i - 1)
 
-			// Check with bitwise operators if the digit is still needed
-			// in a part of the sudoku.
-			boxNeedsDigit := s.boxDigits[row/BoxSize][column/BoxSize]&bit == 0
-			rowNeedsDigit := s.rowDigits[row]&bit == 0
-			columnNeedsDigit := s.columnDigits[column]&bit == 0
-
-			// Only set digit when box, row and column needs the digit.
-			if boxNeedsDigit && rowNeedsDigit && columnNeedsDigit {
+			// Check if the digit can be placed in the current cell.
+			if setDigits&bit == 0 {
 				// Set digit.
 				s.boxDigits[row/BoxSize][column/BoxSize] |= bit
 				s.rowDigits[row] |= bit
